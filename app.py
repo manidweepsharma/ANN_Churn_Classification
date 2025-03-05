@@ -5,16 +5,9 @@ from sklearn.preprocessing import StandardScaler, LabelEncoder, OneHotEncoder
 import pandas as pd
 import pickle
 
-# Custom objects dictionary
-custom_objects = {'BinaryCrossentropy': custom_binary_crossentropy}
-
 # Load the trained model
-try:
-    model = load_model('model.h5', custom_objects=custom_objects)
-    print("Model loaded successfully!")
-except Exception as e:
-    st.error(f"Error loading the model: {e}")
-    model = None
+model = tf.keras.models.load_model('model.h5')
+
 # Load the encoders and scaler
 with open('label_encoder_gender.pkl', 'rb') as file:
     label_encoder_gender = pickle.load(file)
